@@ -60,7 +60,7 @@ void trim(char *s)
   int l = strlen(p);
   while (isspace(p[l - 1]) || p[l - 1] == '\t')
     p[--l] = 0;
-  while (*p && (isspace(*p) | (*p) == '\t'))
+  while (*p && (isspace(*p) || (*p) == '\t'))
     ++p, --l;
   memmove(s, p, l + 1);
 }
