@@ -102,7 +102,7 @@ void generate_tree()
         trim(value);
         if (!strcmp(key, "Name"))
         {
-          strcpy(pn[nr_pn].name, key);
+          strcpy(pn[nr_pn].name, value);
         }
       }
       nr_pn++;
