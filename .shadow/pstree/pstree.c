@@ -35,7 +35,7 @@ int parse_args(int argc, char *argv[])
       break;
     default:
       printf("pstree [-pnV] - process tree print\n");
-      exit(0);
+      exit(-1);
     }
   }
   return 0;
