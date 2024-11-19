@@ -16,16 +16,17 @@ int parse_args(int argc, char *argv[])
 {
   const struct option table[] = {
       {"show-pids", no_argument, NULL, 'p'},
-      {"version", no_argument, NULL, 'v'},
-      {0, 0, NULL, 0},
+      {"numeric-sort", no_argument, 'n'},
+      {"version", no_argument, NULL, 'V'},
+      {0, 0, NULL, 0}
   };
   int o;
-  while ((o = getopt_long(argc, argv, "-pv", table, NULL)) != -1)
+  while ((o = getopt_long(argc, argv, "-pnV", table, NULL)) != -1)
   {
     switch (o)
     {
     case 'v':
-      printf("hello\n");
+      printf("wheatfox(enkerewpo@hotmail.com)\n");
       break;
     default:
       exit(-1);
