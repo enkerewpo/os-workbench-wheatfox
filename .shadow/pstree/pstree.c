@@ -42,6 +42,18 @@ int str_is_all_digits(char *s)
   return 1;
 }
 
+int str2digits(char *s)
+{
+  int n = strlen(s);
+  int ret = 0;
+  for (int i = n - 1; i >= 0; i--)
+  {
+    assert(isdigit(s[i]));
+    ret = ret * 10 + (s[i] - '0');
+  }
+  return ret;
+}
+
 void generate_tree()
 {
   // first let's open /proc and find all subdirs with numbers only
@@ -57,7 +69,12 @@ void generate_tree()
     char *d_name = de->d_name;
     if (str_is_all_digits(d_name))
     {
-      printf("%s ", d_name);
+      int pid = str2digits(d_name);
+      // open /proc/{pid}/status and get the process's info
+      char *path_status = malloc(1024 * sizeof(char));
+      sprintf(path_status, "/proc/%d/status", pid);
+      printf("%s ", path_status);
+      free(path_status);
     }
   }
   closedir(dir);
