@@ -27,9 +27,11 @@ int parse_args(int argc, char *argv[])
     {
     case 'n':
       g_settings.is_numeric_sort = 1;
+      printf("opened numeric sort\n");
       break;
     case 'p':
       g_settings.is_show_pid = 1;
+      printf("opened show pid\n");
       break;
     case 'V':
       printf("version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
