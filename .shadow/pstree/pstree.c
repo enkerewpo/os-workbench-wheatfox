@@ -99,7 +99,7 @@ void generate_tree()
         key = strtok(buf, ":");
         value = strtok(NULL, "\n");
         trim(value);
-        if (strcmp(key, "Name"))
+        if (!strcmp(key, "Name"))
         {
           printf("%s,", value);
         }
