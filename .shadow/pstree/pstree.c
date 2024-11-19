@@ -18,9 +18,10 @@ int parse_args(int argc, char *argv[])
       {"show-pids", no_argument, NULL, 'p'},
       {"numeric-sort", no_argument, NULL, 'n'},
       {"version", no_argument, NULL, 'V'},
+      {"help", no_argument, 'h'},
       {0, 0, NULL, 0}};
   int o;
-  while ((o = getopt_long(argc, argv, "-pnV", table, NULL)) != -1)
+  while ((o = getopt_long(argc, argv, "-pnhV", table, NULL)) != -1)
   {
     switch (o)
     {
@@ -33,8 +34,9 @@ int parse_args(int argc, char *argv[])
     case 'V':
       printf("version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
       break;
+    case 'h':
     default:
-      printf("pstree [-pnV] - process tree print\n");
+      printf("pstree [-pnhV] - process tree print\n");
       exit(-1);
     }
   }
