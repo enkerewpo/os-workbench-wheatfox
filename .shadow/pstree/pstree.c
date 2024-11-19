@@ -123,6 +123,23 @@ void generate_tree()
     }
   }
   closedir(dir);
+  // now let's add pointers between parent and children
+  for (int i = 0; i < nr_pn; i++)
+  {
+    int ppid = pn[i].ppid;
+    if (ppid == 0)
+      pn[i].parent = -1;
+    else
+    {
+      for (int j = 0; j < nr_pn; j++)
+      {
+        if (ppid == pn[j].pid)
+        {
+          add_child(j, i);
+        }
+      }
+    }
+  }
 }
 
 void print_tree()
