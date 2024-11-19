@@ -111,7 +111,7 @@ void generate_tree()
         {
           strcpy(pn[nr_pn].name, value);
         }
-        if (!strcmp(key, "ppid"))
+        if (!strcmp(key, "PPid"))
         {
           int ppid = str2digits(value);
           pn[nr_pn].ppid = ppid;
