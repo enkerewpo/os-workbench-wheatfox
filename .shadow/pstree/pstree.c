@@ -105,8 +105,6 @@ void generate_tree()
         char *key, *value;
         key = strtok(buf, ":");
         value = strtok(NULL, "\n");
-        trim(key);
-        trim(value);
         if (!strcmp(key, "Name"))
         {
           strcpy(pn[nr_pn].name, value);
