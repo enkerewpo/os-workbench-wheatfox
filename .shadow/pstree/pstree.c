@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <getopt.h>
+#include <dirent.h>
 
 struct settings
 {
@@ -13,6 +14,7 @@ struct settings
 struct settings g_settings;
 
 #define MAX_CHILDREN_COUNT 4096
+#define MAX_PROCESS_NODE_COUNT 4096
 
 struct process_node
 {
@@ -23,8 +25,26 @@ struct process_node
   int children[MAX_CHILDREN_COUNT];
 };
 
+struct process_node pn[MAX_PROCESS_NODE_COUNT];
+int nr_pn;
+int root_pn; // should be the pid=1 one
+
 void generate_tree()
 {
+  // first let's open /proc and find all subdirs with numbers only
+  struct dirent *de;
+  DIR *dir = opendir("/proc");
+  if (dir == NULL)
+  {
+    perror("open /proc failed");
+    exit(-1);
+  }
+  while ((de = readdir(dir)) != NULL)
+  {
+    char *d_name = de->d_name;
+    printf("dir: %s\n", d_name);
+  }
+  closedir(dir);
 }
 
 void print_tree()
