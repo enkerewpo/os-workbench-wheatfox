@@ -84,7 +84,7 @@ void generate_tree()
       {
         printf("%s", buf);
       }
-      close(f);
+      fclose(f);
       free(path_status);
     }
   }
