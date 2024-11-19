@@ -76,10 +76,6 @@ int main(int argc, char *argv[])
     assert(argv[i]);
     // printf("argv[%d] = %s\n", i, argv[i]);
   }
-  if (argc == 1)
-  {
-    show_help();
-  }
   parse_args(argc, argv);
   assert(!argv[argc]);
 
