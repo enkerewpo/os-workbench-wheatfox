@@ -85,7 +85,7 @@ void generate_tree()
         // now let's parse this file and get info we need;
         pn[nr_pn].pid = pid;
         char *key;
-        key = strtok(key, buf);
+        key = strtok(buf, ":");
         printf("%s", key);
         nr_pn++;
       }
