@@ -16,10 +16,9 @@ int parse_args(int argc, char *argv[])
 {
   const struct option table[] = {
       {"show-pids", no_argument, NULL, 'p'},
-      {"numeric-sort", no_argument, 'n'},
+      {"numeric-sort", no_argument, NULL, 'n'},
       {"version", no_argument, NULL, 'V'},
-      {0, 0, NULL, 0}
-  };
+      {0, 0, NULL, 0}};
   int o;
   while ((o = getopt_long(argc, argv, "-pnV", table, NULL)) != -1)
   {
