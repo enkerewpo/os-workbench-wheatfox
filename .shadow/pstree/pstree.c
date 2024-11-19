@@ -86,7 +86,7 @@ void generate_tree()
         pn[nr_pn].pid = pid;
         char *key;
         key = strtok(buf, ":");
-        printf("%s", key);
+        printf("%s,", key);
         nr_pn++;
       }
       fclose(f);
