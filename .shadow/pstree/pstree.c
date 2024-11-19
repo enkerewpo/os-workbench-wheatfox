@@ -54,6 +54,17 @@ int str2digits(char *s)
   return ret;
 }
 
+void trim(char *s)
+{
+  char *p = s;
+  int l = strlen(p);
+  while (isspace(p[l - 1]))
+    p[--l] = 0;
+  while (*p && isspace(*p))
+    ++p, --l;
+  memmove(s, p, l + 1);
+}
+
 void generate_tree()
 {
   // first let's open /proc and find all subdirs with numbers only
@@ -87,6 +98,7 @@ void generate_tree()
         char *key, *value;
         key = strtok(buf, ":");
         value = strtok(NULL, "\n");
+        trim(value);
         printf("[%s:%s]", key, value);
         nr_pn++;
       }
