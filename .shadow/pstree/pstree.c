@@ -82,7 +82,12 @@ void generate_tree()
       char buf[1024];
       while (fgets(buf, sizeof(buf), f))
       {
-        printf("%s", buf);
+        // now let's parse this file and get info we need;
+        pn[nr_pn].pid = pid;
+        char *key;
+        key = strtok(key, buf);
+        printf("%s", key);
+        nr_pn++;
       }
       fclose(f);
       free(path_status);
