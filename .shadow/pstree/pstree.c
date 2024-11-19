@@ -149,7 +149,7 @@ void generate_tree()
 void dfs(int u, int dep)
 {
   for (int i = 0; i < dep; i++)
-    printf("  ");
+    printf("++++");
   printf("%s\n", pn[u].name);
   for (int i = 0; i < pn[u].nr_children; i++)
   {
