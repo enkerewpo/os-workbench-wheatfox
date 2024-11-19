@@ -90,7 +90,7 @@ void generate_tree()
         printf("failed to open %s", path_status);
         exit(-1);
       }
-      char buf[1024];
+      char buf[100];
       while (fgets(buf, sizeof(buf), f))
       {
         // now let's parse this file and get info we need;
