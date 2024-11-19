@@ -109,6 +109,7 @@ void generate_tree()
       free(path_status);
     }
   }
+  printf("finished build tree\n");
   closedir(dir);
 }
 
