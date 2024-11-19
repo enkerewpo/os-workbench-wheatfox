@@ -34,7 +34,7 @@ int parse_args(int argc, char *argv[])
       printf("version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
       break;
     default:
-      printf("pstree [-pnV] - process tree print\n");
+      perror("pstree [-pnV] - process tree print\n");
       exit(-1);
     }
   }
