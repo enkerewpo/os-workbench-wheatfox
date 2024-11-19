@@ -81,7 +81,6 @@ void generate_tree()
     if (str_is_all_digits(d_name))
     {
       int pid = str2digits(d_name);
-      printf("processing pid %d\n", pid);
       // open /proc/{pid}/status and get the process's info
       char *path_status = malloc(1024 * sizeof(char));
       sprintf(path_status, "/proc/%d/status", pid);
@@ -105,13 +104,12 @@ void generate_tree()
         {
           strcpy(pn[nr_pn].name, key);
         }
-        nr_pn++;
       }
+      nr_pn++;
       fclose(f);
       free(path_status);
     }
   }
-  printf("finished build tree\n");
   closedir(dir);
 }
 
