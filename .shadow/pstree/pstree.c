@@ -39,7 +39,7 @@ int parse_args(int argc, char *argv[])
       printf("opened show pid\n");
       break;
     case 'V':
-      printf("version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
+      printf("pstree version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
       break;
     case 'h':
     default:
