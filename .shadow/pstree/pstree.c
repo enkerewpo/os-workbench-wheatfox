@@ -58,9 +58,9 @@ void trim(char *s)
 {
   char *p = s;
   int l = strlen(p);
-  while (isspace(p[l - 1]))
+  while (isspace(p[l - 1]) || p[l - 1] == '\t')
     p[--l] = 0;
-  while (*p && isspace(*p))
+  while (*p && (isspace(*p) | (*p) == '\t'))
     ++p, --l;
   memmove(s, p, l + 1);
 }
@@ -99,6 +99,7 @@ void generate_tree()
         char *key, *value;
         key = strtok(buf, ":");
         value = strtok(NULL, "\n");
+        trim(key);
         trim(value);
         if (!strcmp(key, "Name"))
         {
