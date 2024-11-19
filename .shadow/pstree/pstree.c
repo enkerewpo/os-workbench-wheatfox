@@ -150,7 +150,7 @@ void dfs(int u, int dep)
 {
   for (int i = 0; i < dep; i++)
     printf("  ");
-  printf("%s", pn[u].name);
+  printf("%s\n", pn[u].name);
   for (int i = 0; i < pn[u].nr_children; i++)
   {
     int j = pn[u].children[i];
