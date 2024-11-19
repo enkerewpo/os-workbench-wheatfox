@@ -25,7 +25,7 @@ int parse_args(int argc, char *argv[])
     switch (o)
     {
     case 'V':
-      printf("wheatfox(enkerewpo@hotmail.com)\n");
+      printf("version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
       break;
     default:
       exit(-1);
