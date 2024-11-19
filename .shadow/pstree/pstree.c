@@ -117,7 +117,7 @@ void print_tree()
 {
   for (int i = 0; i < nr_pn; i++)
   {
-    printf("%s, ", pn[i].name);
+    printf("%s@%d, ", pn[i].name, pn[i].pid);
   }
 }
 
