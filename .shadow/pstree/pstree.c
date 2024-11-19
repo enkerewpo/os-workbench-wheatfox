@@ -126,6 +126,10 @@ void generate_tree()
   // now let's add pointers between parent and children
   for (int i = 0; i < nr_pn; i++)
   {
+    if (pn[i].pid == 1)
+    {
+      root_pn = i;
+    }
     int ppid = pn[i].ppid;
     if (ppid == 0)
       pn[i].parent = -1;
@@ -142,12 +146,21 @@ void generate_tree()
   }
 }
 
+void dfs(int u, int dep)
+{
+  for (int i = 0; i < dep; i++)
+    printf("  ");
+  printf("%s", pn[u].name);
+  for (int i = 0; i < pn[u].nr_children; i++)
+  {
+    int j = pn[u].children[i];
+    dfs(j, dep + 1);
+  }
+}
+
 void print_tree()
 {
-  for (int i = 0; i < nr_pn; i++)
-  {
-    printf("%s@%d#%d, ", pn[i].name, pn[i].pid, pn[i].ppid);
-  }
+  dfs(root_pn, 0);
 }
 
 void show_help()
