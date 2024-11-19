@@ -12,6 +12,11 @@ struct settings
 
 struct settings g_settings;
 
+void show_help()
+{
+  printf("pstree [-pnhV] - process tree print\n");
+}
+
 int parse_args(int argc, char *argv[])
 {
   const struct option table[] = {
@@ -38,7 +43,7 @@ int parse_args(int argc, char *argv[])
       break;
     case 'h':
     default:
-      printf("pstree [-pnhV] - process tree print\n");
+      show_help();
       exit(-1);
     }
   }
@@ -51,6 +56,10 @@ int main(int argc, char *argv[])
   {
     assert(argv[i]);
     // printf("argv[%d] = %s\n", i, argv[i]);
+  }
+  if (argc == 1)
+  {
+    show_help();
   }
   parse_args(argc, argv);
   assert(!argv[argc]);
