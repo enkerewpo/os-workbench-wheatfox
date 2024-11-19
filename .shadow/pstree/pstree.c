@@ -25,11 +25,18 @@ struct process_node
   char name[128];
   int nr_children;
   int children[MAX_CHILDREN_COUNT];
+  int parent;
 };
 
 struct process_node pn[MAX_PROCESS_NODE_COUNT];
 int nr_pn;
 int root_pn; // should be the pid=1 one
+
+void add_child(int parent, int child)
+{
+  pn[parent].children[pn[parent].nr_children++] = child;
+  pn[child].parent = parent;
+}
 
 int str_is_all_digits(char *s)
 {
@@ -104,6 +111,11 @@ void generate_tree()
         {
           strcpy(pn[nr_pn].name, value);
         }
+        if (!strcmp(key, "ppid"))
+        {
+          int ppid = str2digits(value);
+          pn[nr_pn].ppid = ppid;
+        }
       }
       nr_pn++;
       fclose(f);
@@ -117,7 +129,7 @@ void print_tree()
 {
   for (int i = 0; i < nr_pn; i++)
   {
-    printf("%s@%d, ", pn[i].name, pn[i].pid);
+    printf("%s@%d#%d, ", pn[i].name, pn[i].pid, pn[i].ppid);
   }
 }
 
