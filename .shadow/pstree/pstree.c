@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <dirent.h>
+#include <ctype.h>
 
 struct settings
 {
@@ -29,6 +30,17 @@ struct process_node pn[MAX_PROCESS_NODE_COUNT];
 int nr_pn;
 int root_pn; // should be the pid=1 one
 
+int str_is_all_digits(char *s)
+{
+  int n = strlen(s);
+  for (int i = 0; i < n; i++)
+  {
+    if (!isdigit(s[i]))
+      return 0;
+  }
+  return 1;
+}
+
 void generate_tree()
 {
   // first let's open /proc and find all subdirs with numbers only
@@ -42,7 +54,10 @@ void generate_tree()
   while ((de = readdir(dir)) != NULL)
   {
     char *d_name = de->d_name;
-    printf("dir: %s\n", d_name);
+    if (str_is_all_digits(d_name))
+    {
+      printf("%s ", d_name);
+    }
   }
   closedir(dir);
 }
