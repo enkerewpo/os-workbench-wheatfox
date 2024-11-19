@@ -12,6 +12,25 @@ struct settings
 
 struct settings g_settings;
 
+#define MAX_CHILDREN_COUNT 4096
+
+struct process_node
+{
+  int pid;
+  int ppid;
+  char *name;
+  int nr_children;
+  int children[MAX_CHILDREN_COUNT];
+};
+
+void generate_tree()
+{
+}
+
+void print_tree()
+{
+}
+
 void show_help()
 {
   printf("pstree [-pnhV] - process tree print\n");
@@ -63,5 +82,9 @@ int main(int argc, char *argv[])
   }
   parse_args(argc, argv);
   assert(!argv[argc]);
+
+  generate_tree();
+  print_tree();
+
   return 0;
 }
