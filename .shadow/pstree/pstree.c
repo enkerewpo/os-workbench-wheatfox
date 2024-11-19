@@ -5,6 +5,7 @@
 #include <getopt.h>
 #include <dirent.h>
 #include <ctype.h>
+#include <string.h>
 
 struct settings
 {
