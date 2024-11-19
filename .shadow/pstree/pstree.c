@@ -99,7 +99,10 @@ void generate_tree()
         key = strtok(buf, ":");
         value = strtok(NULL, "\n");
         trim(value);
-        printf("[%s:%s]", key, value);
+        if (strcmp(key, "Name"))
+        {
+          printf("%s,", value);
+        }
         nr_pn++;
       }
       fclose(f);
