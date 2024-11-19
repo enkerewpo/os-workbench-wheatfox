@@ -115,6 +115,10 @@ void generate_tree()
 
 void print_tree()
 {
+  for (int i = 0; i < nr_pn; i++)
+  {
+    printf("%s, ", pn[i].name);
+  }
 }
 
 void show_help()
