@@ -70,11 +70,21 @@ void generate_tree()
     if (str_is_all_digits(d_name))
     {
       int pid = str2digits(d_name);
-      printf("%s\n", d_name);
       // open /proc/{pid}/status and get the process's info
       char *path_status = malloc(1024 * sizeof(char));
       sprintf(path_status, "/proc/%d/status", pid);
-      printf("%s\n", path_status);
+      FILE *f = fopen(path_status, "r");
+      if (f == NULL)
+      {
+        printf("failed to open %s", path_status);
+        exit(-1);
+      }
+      char buf[1024];
+      while (fgets(buf, sizeof(buf), f))
+      {
+        printf("%s", buf);
+      }
+      close(f);
       free(path_status);
     }
   }
