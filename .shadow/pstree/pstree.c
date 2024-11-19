@@ -24,6 +24,12 @@ int parse_args(int argc, char *argv[])
   {
     switch (o)
     {
+    case 'n':
+      g_settings.is_numeric_sort = 1;
+      break;
+    case 'p':
+      g_settings.is_show_pid = 1;
+      break;
     case 'V':
       printf("version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
       break;
