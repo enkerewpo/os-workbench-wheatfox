@@ -22,7 +22,7 @@ struct process_node
 {
   int pid;
   int ppid;
-  char *name;
+  char name[128];
   int nr_children;
   int children[MAX_CHILDREN_COUNT];
 };
@@ -101,7 +101,7 @@ void generate_tree()
         trim(value);
         if (!strcmp(key, "Name"))
         {
-          printf("%s,", value);
+          strcpy(pn[nr_pn].name, key);
         }
         nr_pn++;
       }
