@@ -149,7 +149,12 @@ void dfs(int u, int dep)
 {
   for (int i = 0; i < dep; i++)
     printf("    ");
-  printf("%s\n", pn[u].name);
+  printf("%s", pn[u].name);
+  if (g_settings.is_show_pid == 1)
+  {
+    printf("(%d)", pn[u].pid);
+  }
+  printf("\n");
   for (int i = 0; i < pn[u].nr_children; i++)
   {
     int j = pn[u].children[i];
