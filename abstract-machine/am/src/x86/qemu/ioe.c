@@ -425,6 +425,8 @@ void __am_lapic_eoi(void) {
 }
 
 void __am_lapic_bootap(uint32_t apicid, void *addr) {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warray-bounds"
   int i;
   uint16_t *wrv;
   outb(0x70, 0xF);
