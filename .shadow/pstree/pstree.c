@@ -154,7 +154,7 @@ int cmp(const void *pa, const void *pb)
     return -1;
   else if (a->pid > b->pid)
     return 1;
-  return 1;
+  return -1;
 }
 
 void dfs(int u, int dep)
