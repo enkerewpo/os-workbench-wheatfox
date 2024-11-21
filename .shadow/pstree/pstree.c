@@ -147,93 +147,92 @@ void generate_tree()
 
 int cmp(const void *pa, const void *pb)
 {
-  {
-    struct process_node *a = pa;
-    struct process_node *b = pb;
-    if (a->pid < b->pid)
-      return -1;
-    else if (a->pid > b->pid)
-      return 1;
-    return 0;
-  }
+  const struct process_node *a = pa;
+  const struct process_node *b = pb;
+  if (a->pid < b->pid)
+    return -1;
+  else if (a->pid > b->pid)
+    return 1;
+  return 0;
+}
 
-  void dfs(int u, int dep)
+void dfs(int u, int dep)
+{
+  for (int i = 0; i < dep; i++)
+    printf("    ");
+  printf("%s", pn[u].name);
+  if (g_settings.is_show_pid == 1)
   {
-    for (int i = 0; i < dep; i++)
-      printf("    ");
-    printf("%s", pn[u].name);
-    if (g_settings.is_show_pid == 1)
+    printf("(%d)", pn[u].pid);
+  }
+  printf("\n");
+  if (g_settings.is_numeric_sort == 1)
+  {
+    // we need to sort children by pid
+    qsort(pn[u].children, pn[u].nr_children, sizeof(struct process_node), cmp);
+  }
+  for (int i = 0; i < pn[u].nr_children; i++)
+  {
+    int j = pn[u].children[i];
+    dfs(j, dep + 1);
+  }
+}
+
+void print_tree()
+{
+  dfs(root_pn, 0);
+}
+
+void show_help()
+{
+  printf("pstree [-pnhV] - process tree print\n");
+}
+
+int parse_args(int argc, char *argv[])
+{
+  const struct option table[] = {
+      {"show-pids", no_argument, NULL, 'p'},
+      {"numeric-sort", no_argument, NULL, 'n'},
+      {"version", no_argument, NULL, 'V'},
+      {"help", no_argument, NULL, 'h'},
+      {0, 0, NULL, 0}};
+  int o;
+  while ((o = getopt_long(argc, argv, "-pnhV", table, NULL)) != -1)
+  {
+    switch (o)
     {
-      printf("(%d)", pn[u].pid);
-    }
-    printf("\n");
-    if (g_settings.is_numeric_sort == 1)
-    {
-      // we need to sort children by pid
-      qsort(pn[u].children, pn[u].nr_children, sizeof(struct process_node), cmp);
-    }
-    for (int i = 0; i < pn[u].nr_children; i++)
-    {
-      int j = pn[u].children[i];
-      dfs(j, dep + 1);
+    case 'n':
+      g_settings.is_numeric_sort = 1;
+      // printf("opened numeric sort\n");
+      break;
+    case 'p':
+      g_settings.is_show_pid = 1;
+      // printf("opened show pid\n");
+      break;
+    case 'V':
+      printf("pstree version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
+      break;
+    case 'h':
+    default:
+      show_help();
+      exit(-1);
     }
   }
+  return 0;
+}
 
-  void print_tree()
+int main(int argc, char *argv[])
+{
+  for (int i = 0; i < argc; i++)
   {
-    dfs(root_pn, 0);
+    assert(argv[i]);
+    // printf("argv[%d] = %s\n", i, argv[i]);
   }
+  parse_args(argc, argv);
+  assert(!argv[argc]);
 
-  void show_help()
-  {
-    printf("pstree [-pnhV] - process tree print\n");
-  }
+  generate_tree();
+  print_tree();
 
-  int parse_args(int argc, char *argv[])
-  {
-    const struct option table[] = {
-        {"show-pids", no_argument, NULL, 'p'},
-        {"numeric-sort", no_argument, NULL, 'n'},
-        {"version", no_argument, NULL, 'V'},
-        {"help", no_argument, NULL, 'h'},
-        {0, 0, NULL, 0}};
-    int o;
-    while ((o = getopt_long(argc, argv, "-pnhV", table, NULL)) != -1)
-    {
-      switch (o)
-      {
-      case 'n':
-        g_settings.is_numeric_sort = 1;
-        // printf("opened numeric sort\n");
-        break;
-      case 'p':
-        g_settings.is_show_pid = 1;
-        // printf("opened show pid\n");
-        break;
-      case 'V':
-        printf("pstree version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
-        break;
-      case 'h':
-      default:
-        show_help();
-        exit(-1);
-      }
-    }
-    return 0;
-  }
-
-  int main(int argc, char *argv[])
-  {
-    for (int i = 0; i < argc; i++)
-    {
-      assert(argv[i]);
-      // printf("argv[%d] = %s\n", i, argv[i]);
-    }
-    parse_args(argc, argv);
-    assert(!argv[argc]);
-
-    generate_tree();
-    print_tree();
-
-    return 0;
-  }
+  return 0;
+}
