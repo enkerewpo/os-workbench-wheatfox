@@ -147,13 +147,14 @@ void generate_tree()
 
 int cmp(const void *pa, const void *pb)
 {
-  return 1;
   const struct process_node *a = pa;
   const struct process_node *b = pb;
+  printf("cmp: %s %d %s %d\n", a->name, a->pid, b->name, b->pid);
   if (a->pid < b->pid)
     return -1;
   else if (a->pid > b->pid)
     return 1;
+  return 0;
 }
 
 void dfs(int u, int dep)
