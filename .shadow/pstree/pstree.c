@@ -147,14 +147,9 @@ void generate_tree()
 
 int cmp(const void *pa, const void *pb)
 {
-  struct process_node *a = (struct process_node *)pa;
-  struct process_node *b = (struct process_node *)pb;
-  printf("cmp: %s %d %s %d\n", a->name, a->pid, b->name, b->pid);
-  if (a->pid < b->pid)
-    return -1;
-  else if (a->pid > b->pid)
-    return 1;
-  return 0;
+  int a = *(int *)pa;
+  int b = *(int *)pb;
+  return pn[a].pid - pn[b].pid;
 }
 
 void dfs(int u, int dep)
@@ -170,7 +165,7 @@ void dfs(int u, int dep)
   if (g_settings.is_numeric_sort == 1)
   {
     // we need to sort children by pid
-    qsort(pn[u].children, pn[u].nr_children, sizeof(struct process_node), cmp);
+    qsort(pn[u].children, pn[u].nr_children, sizeof(int), cmp);
     return;
   }
   for (int i = 0; i < pn[u].nr_children; i++)
