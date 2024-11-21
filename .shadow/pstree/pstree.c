@@ -166,7 +166,6 @@ void dfs(int u, int dep)
   {
     // we need to sort children by pid
     qsort(pn[u].children, pn[u].nr_children, sizeof(int), cmp);
-    return;
   }
   for (int i = 0; i < pn[u].nr_children; i++)
   {
