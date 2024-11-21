@@ -147,6 +147,7 @@ void generate_tree()
 
 int cmp(const void *pa, const void *pb)
 {
+  return 0;
   const struct process_node *a = pa;
   const struct process_node *b = pb;
   if (a->pid < b->pid)
@@ -169,7 +170,7 @@ void dfs(int u, int dep)
   if (g_settings.is_numeric_sort == 1)
   {
     // we need to sort children by pid
-    // qsort(pn[u].children, pn[u].nr_children, sizeof(struct process_node), cmp);
+    qsort(pn[u].children, pn[u].nr_children, sizeof(struct process_node), cmp);
   }
   for (int i = 0; i < pn[u].nr_children; i++)
   {
