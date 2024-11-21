@@ -147,8 +147,8 @@ void generate_tree()
 
 int cmp(const void *pa, const void *pb)
 {
-  const struct process_node *a = pa;
-  const struct process_node *b = pb;
+  struct process_node *a = (struct process_node *)pa;
+  struct process_node *b = (struct process_node *)pb;
   printf("cmp: %s %d %s %d\n", a->name, a->pid, b->name, b->pid);
   if (a->pid < b->pid)
     return -1;
