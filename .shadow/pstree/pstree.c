@@ -207,7 +207,7 @@ int parse_args(int argc, char *argv[])
       break;
     case 'V':
       printf("pstree version 0.0.1\nwheatfox(enkerewpo@hotmail.com)\n");
-      break;
+      exit(0);
     case 'h':
     default:
       show_help();
